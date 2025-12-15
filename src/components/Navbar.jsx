@@ -33,7 +33,7 @@ const Navbar = () => {
     { label: "Dashboard", path: "/dashboard/admin" },
     { label: "Manage Items", path: "/dashboard/manage-products" },
     { label: "All Orders", path: "/dashboard/manage-orders" },
-    { label: "Add Products", path: "/dashboard/add-products" },
+    { label: "Add Products", path: "/dashboard/add-product" },
   ];
 
   const dropdownMenus =
@@ -93,9 +93,9 @@ const Navbar = () => {
         <div className="flex items-center gap-5">
 
           {/* Search */}
-          <NavLink to="/search" className="text-xl">
+          {/* <NavLink to="/search" className="text-xl">
             <i className="ri-search-line"></i>
-          </NavLink>
+          </NavLink> */}
 
           {/* Cart */}
           <button

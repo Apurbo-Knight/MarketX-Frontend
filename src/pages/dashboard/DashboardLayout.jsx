@@ -22,12 +22,12 @@ const DashboardLayout = () => {
     }
   return (
     <div className='container mx-auto flex flex-col md:flex-row gap-4 items-start justify-start'>
-        <header className='lg:w-1/5 sm:w-2/5 w-full border mt-5'>
+        <header className='lg:w-1/5 sm:w-2/5 w-full border border-gray-300  mt-5'>
             {
                 renderDashboard()
             }
         </header>
-        <main className='p-8 bg-white w-full border mt-5'>
+        <main className='p-8 bg-white w-full border border-gray-300  mt-5'>
             <Outlet/>
         </main>
         

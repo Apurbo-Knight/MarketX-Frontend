@@ -68,7 +68,7 @@ const ManageOrders = () => {
                                     to="#"
                                     className="text-blue-500 hover:underline"
                                 >
-                                    View
+                                    
                                 </Link>
                                 <button
                                     onClick={() => handleEdit(order)}
