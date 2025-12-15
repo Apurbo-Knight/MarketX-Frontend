@@ -52,7 +52,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-full border-b bg-white">
+    <header className="w-full border-b border-gray-200 bg-white mb-2">
       <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
 
         {/* Mobile Menu Button */}
@@ -65,7 +65,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <NavLink to="/" className="text-2xl font-extrabold">
-          Lebaba<span className="text-primary">.</span>
+          MarketX<span className="text-primary">.</span>
         </NavLink>
 
         {/* Desktop Nav Links */}
