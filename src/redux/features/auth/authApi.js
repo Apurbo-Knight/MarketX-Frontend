@@ -1,15 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getBaseUrl } from "../../../utils/getBaseUrl";
 
-// query : get method
-// mutation : other methods
-
 const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${getBaseUrl()}/api/auth`,
-    credentials:
-      "include" /*cookie jate beowser a store hoy a jonno ata use kori*/,
+    prepareHeaders: (headers) => {
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user?.token) {
+          headers.set("Authorization", `Bearer ${user.token}`);
+        }
+      } catch {}
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -19,6 +23,7 @@ const authApi = createApi({
         body: newUser,
       }),
     }),
+
     loginUser: builder.mutation({
       query: (credentials) => ({
         url: "/login",
@@ -26,43 +31,31 @@ const authApi = createApi({
         body: credentials,
       }),
     }),
+
     logoutUser: builder.mutation({
       query: () => ({
         url: "/logout",
         method: "POST",
-        credentials: "include",
       }),
     }),
-    editProfile: builder.mutation({
-      query: ({ id, profileData }) => ({
-        url: `/edit-profile/${id}`,
-        method: "PATCH",
-        body: profileData,
-      }),
-    }),
+
     getUsers: builder.query({
-      query: () => ({
-        url: "/users",
-        method: "GET",
-      }),
-      refetchOnMount: true,
-      invalidatesTags: ["Users"],
+      query: () => "/users",
     }),
+
     deleteUser: builder.mutation({
-      query: (userId) => ({
-        url: `/user/${userId}`,
+      query: (id) => ({
+        url: `/user/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Users"],
     }),
+
     updateUserRole: builder.mutation({
       query: ({ userId, role }) => ({
         url: `/user/${userId}`,
         method: "PUT",
         body: { role },
       }),
-      refetchOnMount: true,
-      invalidatesTags: ["Users"],
     }),
   }),
 });
@@ -71,10 +64,9 @@ export const {
   useLoginUserMutation,
   useRegisterUserMutation,
   useLogoutUserMutation,
-  useEditProfileMutation,
   useGetUsersQuery,
   useDeleteUserMutation,
-  useUpdateUserRoleMutation
+  useUpdateUserRoleMutation,
 } = authApi;
 
 export default authApi;
