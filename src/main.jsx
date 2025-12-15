@@ -18,7 +18,6 @@ import PrivateRoute from "./routes/PrivateRoute.jsx";
 import UserDMain from "./pages/dashboard/user/dashboard/UserDMain.jsx";
 import UserOrder from "./pages/dashboard/user/orders/UserOrder.jsx";
 import OrderDetails from "./pages/dashboard/user/orders/OrderDetails.jsx";
-import UserPayments from "./pages/dashboard/user/payments/userPayments.jsx";
 import UserReviews from "./pages/dashboard/user/reviews/UserReviews.jsx";
 import UserProfile from "./pages/dashboard/user/profile/UserProfile.jsx";
 import AdminDMain from "./pages/dashboard/admin/dashboard/AdminDMain.jsx";
@@ -27,6 +26,7 @@ import ManageOrders from "./pages/dashboard/admin/manageOrders/ManageOrders.jsx"
 import AddProduct from "./pages/dashboard/admin/addProduct/AddProduct.jsx";
 import ManageProducts from "./pages/dashboard/admin/manageProduct/ManageProducts.jsx";
 import UpdateProduct from "./pages/dashboard/admin/manageProduct/UpdateProduct.jsx";
+import UserPayments from "./pages/dashboard/user/payments/UserPayments.jsx";
 
 
 createRoot(document.getElementById("root")).render(
