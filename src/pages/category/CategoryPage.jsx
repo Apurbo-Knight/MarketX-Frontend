@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import ProductCards from "../shop/ProductCards";
-import products from "../../data/products.json"
+import { useFetchAllProductsQuery } from "../../redux/features/products/productsApi";
+
 
 const CategoryPage = () => {
   const { categoryName } = useParams();
   const [filteredProducts, setFilteredProducts] = useState([])
+
+  const { data, error, isLoading } = useFetchAllProductsQuery({});
+
+  // Safely extract products from API response
+  const products = data?.data?.products || [];
 
     useEffect(()=> {
         const filtered =  products.filter((product) => product.category === categoryName.toLowerCase());

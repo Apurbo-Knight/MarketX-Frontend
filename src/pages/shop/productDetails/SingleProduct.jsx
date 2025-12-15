@@ -1,28 +1,32 @@
 import React from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useNavigate } from "react-router"; 
 import { useFetchProductsByIdQuery } from "../../../redux/features/products/productsApi";
 import Loading from "../../../components/Loading";
 import RatingStars from "../../../components/RatingStars";
 import ReviewCard from "../reviews/ReviewCard";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../redux/features/cart/cartSlice";
 
 const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user); 
+
   const { data, isError, isLoading } = useFetchProductsByIdQuery(id);
 
-  
   const productDetails = data?.data;
   const product = productDetails?.product;
   const reviews = productDetails?.reviews;
 
   if (isError) return <div>Error to load single product</div>;
   if (isLoading) return <Loading />;
-  console.log(product)
-
 
   const handleAddToCart = (product) => {
+    if (!user) {
+      navigate("/login"); 
+      return;
+    }
     dispatch(addToCart(product));
   };
 
@@ -53,7 +57,7 @@ const SingleProduct = () => {
           <div className="w-full md:w-1/2">
             <img
               src={product?.image}
-              alt=""
+              alt={product?.name}
               className="rounded-md w-full h-auto"
             />
           </div>
@@ -83,9 +87,7 @@ const SingleProduct = () => {
 
             {/* Add to Cart Button */}
             <button
-              onClick={() => {
-                handleAddToCart(product);
-              }}
+              onClick={() => handleAddToCart(product)}
               className="mt-6 px-6 py-3 bg-primary text-white rounded-md"
             >
               Add to Cart
