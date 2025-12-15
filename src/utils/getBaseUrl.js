@@ -1,3 +1,3 @@
 export const getBaseUrl = () => {
-    return "http://localhost:3000"
+    return "https://market-x-backend-alpha.vercel.app"
 }
