@@ -1,31 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 const loadUserFromLocalStorage = () => {
-  try {
-    const stored = localStorage.getItem("user");
-    if (!stored) return { user: null };
-    return { user: JSON.parse(stored) };
-  } catch {
-    return { user: null };
-  }
-};
+    try{
+        const serializedState = localStorage.getItem('user')
+        if(!serializedState){
+            return {user:null}
+        }
+        return {user: JSON.parse(serializedState) }
+    }catch(error){
+        return {user:null}
+    }
+}
 
 const initialState = loadUserFromLocalStorage();
 
-const authSlice = createSlice({
-  name: "auth",
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
-      localStorage.setItem("user", JSON.stringify(action.payload));
+    setUser: (state,action) => {
+      state.user = action.payload;   /*initialState er structure depend kore state er type change hoy*/ 
+      console.log(state.user);
+      localStorage.setItem('user', JSON.stringify(state.user))
     },
     logout: (state) => {
       state.user = null;
-      localStorage.removeItem("user");
-    },
-  },
-});
+      localStorage.removeItem('user')
+    }
+  }
+})
 
-export const { setUser, logout } = authSlice.actions;
+// Action creators are generated for each case reducer function
+export const { setUser, logout} = authSlice.actions;
+
 export default authSlice.reducer;
