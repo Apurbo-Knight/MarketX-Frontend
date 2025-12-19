@@ -1,5 +1,5 @@
 # Market-X Frontend
-- https://market-x-frontend.vercel.app/shop
+- https://market-x-frontend.vercel.app
 
 ## Description
 Market-X Frontend is a responsive web application built with React.js. It provides a modern user interface for browsing products and interacting with the backend API.
